@@ -6,6 +6,18 @@ const Movie = require('../models/Movie');
 const { findById } = require('../models/Movie');
 
 
+
+
+
+router.get('/', (req, res) =>{
+    
+    const promise = Movie.find({ });
+    promise.then((data)=>{
+        res.json(data);
+    }).catch((err)=>{
+        res.json(err);
+    });
+});
  //TOP 10 LIST
 
  router.get('/top10', (req, res) =>{
@@ -19,15 +31,7 @@ const { findById } = require('../models/Movie');
 });
 
 
-router.get('/', (req, res) =>{
-    
-    const promise = Movie.find({ });
-    promise.then((data)=>{
-        res.json(data);
-    }).catch((err)=>{
-        res.json(err);
-    });
-});
+
 
 router.get('/:movie_id', (req,res,next)=>{
 
@@ -75,15 +79,7 @@ router.delete('/:movie_id', (req,res,next)=>{
 });
 
 router.post('/', (req, res , next) => {
-    const {title, imdb_score, category, country, year } = req.body;
-
-    const movie = new Movie({
-        title : title,
-        imdb_score : imdb_score,
-        category : category,
-        country : country,
-        year : year
-    });
+    const movie = new Movie(req.body);
 
     /*movie.save((err, data ) =>{
         if(err)
@@ -95,10 +91,8 @@ router.post('/', (req, res , next) => {
     const promise = movie.save();
 
     promise.then((data) =>{
-        res.json({status : 1});
-    });
-
-    promise.catch((err) =>{
+        res.json(data);
+    }).catch((err) =>{
         res.json(err);
     });
 
