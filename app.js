@@ -21,6 +21,9 @@ app.set('api_secret_key', config.api_secret_key);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+//middleware
+const verifytoken = require('./middleware/verifytoken');
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -29,6 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/api', verifytoken);
 app.use('/api/movies', movie);
 app.use('/api/directors', director);
 
