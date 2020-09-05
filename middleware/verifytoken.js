@@ -11,6 +11,7 @@ module.exports = (req, res , next) => {
                     message : 'failed to authenticate'
                 });
             }else{
+                req.decoded = decode,
                 next();
             }
         })
