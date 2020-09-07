@@ -1,5 +1,3 @@
-
-
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
@@ -60,7 +58,7 @@ describe('/api/movies tests', () => {
         });
     });
 
-    describe('/Get/:Director_id movie', () =>{
+    describe('/Get/:movie_id movie', () =>{
         it('it should GET a movie by the given id', (done)=>{
             chai.request(server)
             .get('/api/movies/' +movieId)
