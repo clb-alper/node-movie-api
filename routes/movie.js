@@ -83,7 +83,7 @@ router.delete('/:movie_id', (req,res,next)=>{
         if(!movie)
             next({message : 'movie was not found', code : 1});
 
-        res.json(movie);
+        res.json({status : 1});
     }).catch((err)=>{
         res.json(err);
     });
