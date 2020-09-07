@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start:Dev": "nodemon ./bin/www",
-    "test" : "mocha --exit"
+    "test" : "mocha --exit --recursive --timeout 15000"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
