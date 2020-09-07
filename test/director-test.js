@@ -9,31 +9,29 @@ let token, directorId;
 describe('Director tests', () => {
 	before('Get Token', (done) => {
 		chai.request(server)
-			.post('/authenticate')
-			.send({username: 'alper', password: '123456'})
-			.end((err, res) => {
-				if (err){
-                    throw err;
-                }    
-
-				token = res.body.token;
-				done();
-			});
+		.post('/authenticate')
+		.send({username: 'alper', password: '123456'})
+		.end((err, res) => {
+			if (err){
+                throw err;
+            }    
+			token = res.body.token;
+			done();
+		});
 	});
 
 	describe('/GET Directors', () => {
 		it('Get all directors records', (done) => {
 			chai.request(server)
-				.get('/api/directors')
-				.set('x-access-token', token)
-				.end((err, res) => {
-					if (err)
-						throw err;
-
-					res.should.have.status(200);
-					res.body.should.be.a('array');
-					done();
-				});
+			.get('/api/directors')
+			.set('x-access-token', token)
+			.end((err, res) => {
+				if (err)
+					throw err;
+				res.should.have.status(200);
+				res.body.should.be.a('array');
+				done();
+			});
 		});
     });
 
@@ -89,17 +87,17 @@ describe('Director tests', () => {
 			};
 
 			chai.request(server)
-				.put('/api/directors/' + directorId)
-				.send(testDirector)
-				.set('x-access-token', token)
-				.end((err, res) => {
-					if (err)
-						throw err;
+			.put('/api/directors/' + directorId)
+			.send(testDirector)
+			.set('x-access-token', token)
+			.end((err, res) => {
+				if (err)
+					throw err;
 
-					res.should.have.status(200);
-					res.body.should.be.a('object');
-					res.body.should.have.property('name').eql(testDirector.name);
-					done();
+				res.should.have.status(200);
+				res.body.should.be.a('object');
+				res.body.should.have.property('name').eql(testDirector.name);
+				done();
 			});
 		});
 	});
@@ -107,17 +105,17 @@ describe('Director tests', () => {
     describe('/DELETE :director_id', () => {
 		it('Delete Director record by id', (done) => {
 			chai.request(server)
-				.del('/api/directors/' + directorId)
-				.set('x-access-token', token)
-				.end((err, res) => {
-					if (err)
-						throw err;
+			.del('/api/directors/' + directorId)
+			.set('x-access-token', token)
+			.end((err, res) => {
+				if (err)
+					throw err;
 
-					res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('status').eql(1);
-					done();
-				});
+				res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('status').eql(1);
+				done();
+			});
 		});
 	});
 });
