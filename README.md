@@ -1,3 +1,6 @@
+[![Build Status](https://api.travis-ci.org/clb-alper/node-movie-api.svg?branch=master&status=passed)](https://travis-ci.org/github/clb-alper/node-movie-api)
+
+
 # Movies
  
 | Route | HTTP Verb | POST body | Description |
